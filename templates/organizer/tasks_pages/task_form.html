@@ -1,0 +1,17 @@
+{% extends "organizer/base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4>{{ title }}</h4>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'task-list' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

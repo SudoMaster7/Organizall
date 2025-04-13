@@ -1,0 +1,26 @@
+{% extends "organizer/base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-4">
+    <h2>Minhas Tarefas</h2>
+    <a href="{% url 'task-create' %}" class="btn btn-success">+ Nova Tarefa</a>
+</div>
+
+<div class="list-group">
+    {% for task in tasks %}
+    <a href="{% url 'task-detail' task.pk %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ task.title }}</h5>
+            <small class="text-muted">Prazo: {{ task.due_date|date:"d/m/Y" }}</small>
+        </div>
+        <p class="mb-1">{{ task.description|truncatechars:100 }}</p>
+        <span class="badge bg-{{ task.get_status_color }}">{{ task.get_status_display }}</span>
+        {% if task.project %}
+        <span class="badge bg-info ms-2">{{ task.project.name }}</span>
+        {% endif %}
+    </a>
+    {% empty %}
+    <div class="alert alert-info">Nenhuma tarefa cadastrada ainda.</div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "organizer/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Meus Projetos</h2>
+        <a href="{% url 'project-create' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Novo Projeto
+        </a>
+    </div>
+
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 project-card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{{ project.name }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ project.description|truncatechars:150 }}</p>
+                    
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" 
+                             style="width: {{ project.progress }}%">
+                            {{ project.progress }}%
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between text-muted small">
+                        <span>Início: {{ project.start_date|date:"d/m/Y" }}</span>
+                        <span>Término: {{ project.end_date|date:"d/m/Y" }}</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <a href="{% url 'project-detail' project.pk %}" class="btn btn-sm btn-primary">
+                        <i class="bi bi-eye"></i> Detalhes
+                    </a>
+                    <a href="{% url 'project-update' project.pk %}" class="btn btn-sm btn-warning">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                Nenhum projeto cadastrado ainda.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

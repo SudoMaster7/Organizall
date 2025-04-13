@@ -1,0 +1,64 @@
+{% extends "organizer/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">{{ project.name }}</h4>
+                <div>
+                    <span class="badge bg-light text-dark">
+                        {{ project.start_date|date:"d/m/Y" }} a {{ project.end_date|date:"d/m/Y" }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <h5 class="card-title">Descrição</h5>
+            <p class="card-text">{{ project.description }}</p>
+            
+            <div class="progress mb-4" style="height: 25px;">
+                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" 
+                     style="width: {{ project.progress }}%">
+                    <strong>{{ project.progress }}% Completo</strong>
+                </div>
+            </div>
+            
+            <h5 class="mt-4">Tarefas Relacionadas</h5>
+            <div class="list-group mb-4">
+                {% for task in tasks %}
+                <a href="{% url 'task-detail' task.pk %}" 
+                   class="list-group-item list-group-item-action">
+                    <div class="d-flex justify-content-between">
+                        <span>{{ task.title }}</span>
+                        <span class="badge bg-{{ task.get_status_color }}">
+                            {{ task.get_status_display }}
+                        </span>
+                    </div>
+                </a>
+                {% empty %}
+                <div class="list-group-item">Nenhuma tarefa neste projeto</div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'project-list' %}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+                <div>
+                    <a href="{% url 'project-update' project.pk %}" class="btn btn-warning">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <a href="{% url 'project-delete' project.pk %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Excluir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

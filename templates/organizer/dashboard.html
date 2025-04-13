@@ -1,0 +1,47 @@
+{% extends "organizer/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h5>Últimas Tarefas</h5>
+            </div>
+            <div class="card-body">
+                {% for task in tasks %}
+                <div class="mb-3 p-2 border rounded">
+                    <h6>{{ task.title }}</h6>
+                    <small class="text-muted">Prazo: {{ task.due_date|date:"d/m/Y" }}</small>
+                    <span class="badge bg-{{ task.get_status_color }} float-end">{{ task.get_status_display }}</span>
+                </div>
+                {% empty %}
+                <p>Nenhuma tarefa cadastrada.</p>
+                {% endfor %}
+                <a href="{% url 'task-list' %}" class="btn btn-sm btn-outline-info">Ver todas</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5>Projetos Ativos</h5>
+            </div>
+            <div class="card-body">
+                {% for project in projects %}
+                <div class="mb-3 p-2 border rounded">
+                    <h6>{{ project.name }}</h6>
+                    <small class="text-muted">Término: {{ project.end_date|date:"d/m/Y" }}</small>
+                    <div class="progress mt-2" style="height: 5px;">
+                        <div class="progress-bar" style="width: 25%"></div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>Nenhum projeto cadastrado.</p>
+                {% endfor %}
+                <a href="{% url 'project-list' %}" class="btn btn-sm btn-outline-success">Ver todos</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
