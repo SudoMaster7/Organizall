@@ -84,7 +84,7 @@ Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE)
 💡 **Quer contribuir ou reportar um bug?**  
 👉 Abra uma **[Issue](https://github.com/SudoMaster7/Organizall/issues)** ou envie um **Pull Request**!  
 
-✉️ **Email:** [seu-email@exemplo.com](mailto:seu-email@exemplo.com)  
+✉️ **Email:** [moraesleonardobrito@gmail.com](mailto:moraesleonardobrito@gmail.com)  
 
 ---
 
