@@ -91,4 +91,4 @@ Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE)
 <div align="center">
   <sub>Desenvolvido com ❤️ por <a href="https://github.com/SudoMaster7">SudoMaster7</a></sub>
 </div>
-```
+
